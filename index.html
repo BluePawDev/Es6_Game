@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <script src="vendors/angular.min.js"></script>
+
     <script src="script.js" charset="utf-8"></script>
     <link rel="stylesheet" href="vendors/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -25,6 +26,7 @@
           <p>Price: {{item.price | currency:"$"}}</p>
           <p>Average price paid: {{item.averageDisplay | currency:"$"}}</p>
           <p>Amount owned: {{item.owned}}</p>
+          <!-- <p>{{counter}}</p> -->
           <button class="btn btn-success" ng-click="gc.sellItem($index)" name="button">Sell</button>
         </div>
       </div>
