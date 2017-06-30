@@ -12,34 +12,28 @@
   <body ng-app="myApp" ng-controller="gameController as gc">
     <div class="container">
       <div class="jumbotron">
-    <h1 class="header">Super amazing awesome Price Commodities Game</h1>
-  </div>
-    <h3 class="header">Balance: {{gc.balance | currency:"$"}}</h3>
-    <button ng-if="gc.gameStop" type="button" ng-click="gc.startGame()" name="button">Start Game</button>
-    <div  class="row">
-      <div ng-repeat="item in gc.inventory" class="col-lg-3">
-
-      <div class="card" style="width: 25rem;">
-        <img ng-click="gc.buyItem($index)" ng-src="{{item.img}}" alt="">
-        <div class="card-block">
-          <h4 class="card-title">{{item.name}}</h4>
-          <p>Price: {{item.price | currency:"$"}}</p>
-          <p>Average price paid: {{item.averageDisplay | currency:"$"}}</p>
-          <p>Amount owned: {{item.owned}}</p>
-          <!-- <p>{{counter}}</p> -->
-          <button class="btn btn-success" ng-click="gc.sellItem($index)" name="button">Sell</button>
+        <h1 class="header">Super amazing awesome Price Commodities Game</h1>
+        <p class="start">Make as much money as possible in fifteen minutes!!!</p>
+      </div>
+      <div class="container start">
+        <h3 class="header">Balance: {{gc.balance | currency:"$"}}</h3>
+        <button ng-if="gc.gameStop" class="btn btn-success" type="button" ng-click="gc.startGame()" name="button">Start Game</button>
+      </div>
+      <div  class="row">
+        <div ng-repeat="item in gc.inventory">
+          <div ng-if="$index === 0 || $index === 4 || $index === 8" class="head col-lg-12"><h3>{{item.category | uppercase}}</h3></div>
+            <div class="card col-lg-3" style="width: 25rem;">
+              <img ng-click="gc.buyItem($index)" ng-src="{{item.img}}" alt="">
+              <div class="card-block">
+                <h4 class="card-title">{{item.name}}</h4>
+                <p>Price: {{item.price | currency:"$"}}</p>
+                <p>Average price paid: {{item.averageDisplay | currency:"$"}}</p>
+                <p>Amount owned: {{item.owned}}</p>
+                <button class="btn btn-success" ng-click="gc.sellItem($index)" name="button">Sell</button>
+              </div>
+          </div>
         </div>
       </div>
-
-      <!--
-        <img ng-click="gc.buyItem($index)" ng-src="{{item.img}}" alt="">
-        <p>{{item.name}}</p>
-        <p>Price: {{item.price | currency:"$"}}</p>
-        <p>Average price paid: {{item.averageDisplay | currency:"$"}}</p>
-        <p>Amount owned: {{item.owned}}</p>
-        <button class="btn btn-success" ng-click="gc.sellItem($index)" name="button">Sell</button> -->
-      </div>
-    </div>
     </div>
   </body>
 </html>
