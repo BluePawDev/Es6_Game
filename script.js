@@ -34,10 +34,11 @@ function gameController($interval){
 
 
   class Commodity {
-    constructor(name, img){
+    constructor(name, img, category){
     this.price = 0;
     this.name = name;
     this.img = img;
+    this.category = category
     this.pricesArray = [];
     this.averageDisplay = 0;
     this.owned = 0;
@@ -47,7 +48,7 @@ function gameController($interval){
     };
     changePrice() {
        $interval(() => {
-         let x = randomNumber(0, 10);
+         let x = randomNumber(0, 9);
          if (x >= 5) {
            let z = randomNumber(0.5, 1);
            this.price += z
@@ -71,26 +72,26 @@ function gameController($interval){
   function randomNumber(min, max){
       return mathNumber = (Math.random() * (max - min));
       }
-  const array = [
-              ['apple', 'images/apple.png'],
-              ['orange', 'images/orange.png'],
-              ['banana', 'images/bananas.png'],
-              ['grapes', 'images/grapes.png'],
-              ['lamp', 'images/lamp.png'],
-              ['clock', 'images/clock.png'],
-              ['blue ray player', 'images/blu-ray-player.png'],
-              ['comic book', 'images/comic-books.png'],
-              ['fancy stuffed animal', 'images/stuffed-animal.png'],
-              ['jewelry', 'images/jewelry.png'],
-              ['wine', 'images/wine.png'],
-              ['toaster', 'images/toaster.png']
+
+  const itemsArray = [
+              ['apple', 'images/apple.png', 'fruit'],
+              ['orange', 'images/orange.png', 'fruit'],
+              ['banana', 'images/bananas.png', 'fruit'],
+              ['grapes', 'images/grapes.png', 'fruit'],
+              ['lamp', 'images/lamp.png', 'Small electronic'],
+              ['clock', 'images/clock.png', 'Small electronic'],
+              ['toaster', 'images/toaster.png', 'Small electronic'],
+              ['blue ray player', 'images/blu-ray-player.png', 'Small electronic'],
+              ['comic book', 'images/comic-books.png', 'collectible'],
+              ['fancy stuffed animal', 'images/stuffed-animal.png', 'collectible'],
+              ['jewelry', 'images/jewelry.png', 'collectible'],
+              ['wine', 'images/wine.png', 'collectible']
             ]
 
-  for ( let commodity of array) {
+  for ( let commodity of itemsArray) {
     let item = new Commodity(...commodity);
     item.setPrice();
     item.changePrice();
     vm.inventory.push(item);
   }
-  console.log(vm.inventory);
 }

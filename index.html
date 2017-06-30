@@ -11,14 +11,14 @@
   <body ng-app="myApp" ng-controller="gameController as gc">
     <div class="container">
     <h1 class="header">Price Commodities Game</h1>
-    <h3 class="header">{{gc.balance | currency:"$"}}</h3>
-    <div  class="container outPutDiv row">
-      <div ng-repeat="item in gc.inventory" class="col-lg-4">
+    <h3 class="header">Balance: {{gc.balance | currency:"$"}}</h3>
+    <div  class="row">
+      <div ng-repeat="item in gc.inventory" class="col-lg-3">
         <img ng-click="gc.buyItem($index)" ng-src="{{item.img}}" alt="">
         <p>{{item.name}}</p>
-        <p>{{item.price | currency:"$"}}</p>
-        <p>{{item.averageDisplay | currency:"$"}}</p>
-        <p>{{item.owned}}</p>
+        <p>Price: {{item.price | currency:"$"}}</p>
+        <p>Average price paid: {{item.averageDisplay | currency:"$"}}</p>
+        <p>Amount owned: {{item.owned}}</p>
         <button class="btn btn-success" ng-click="gc.sellItem($index)" name="button">Sell</button>
       </div>
     </div>
