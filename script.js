@@ -2,26 +2,41 @@ var app = angular.module('myApp', []);
 
 app.controller('gameController', gameController);
 
-function gameController($interval){
+function gameController($interval, $window){
   var vm = this;
   vm.inventory = [];
   vm.balance = 100;
+  vm.gameStop = true;
+  vm.counter;
+
+  vm.startGame = function(){
+    for (let item of vm.inventory) {
+      vm.balance = 100;
+      vm.gameStop = false;
+      item.setPrice();
+      item.changePrice();
+    };
+  }
 
     vm.sellItem = function(index){
-      console.log(index);
-      let item = vm.inventory[index];
-      if (item.owned > 0) {
-        item.owned --;
-        vm.balance += item.price;
+      if (!gameStop) {
+        let item = vm.inventory[index];
+        if (item.owned > 0) {
+          item.owned --;
+          vm.balance += item.price;
+        }
       }
     }
 
   vm.buyItem = function(index){
-    let item = vm.inventory[index];
-    if (vm.balance >= item.price) {
-      vm.balance -= item.price;
-      item.owned ++;
-      averager(index)
+    if (!gameStop) {
+      let item = vm.inventory[index];
+      if (vm.balance >= item.price) {
+        vm.balance -= item.price;
+        item.owned ++;
+        averager(index)
+      }
+      item.bought = true;
     }
   }
 
@@ -65,8 +80,8 @@ function gameController($interval){
              this.price += randomNumber(0.5, 1);
            }
          }
-    }, 15000);
-  };
+      }, 15000);
+    };
   } //class end
 
   function randomNumber(min, max){
@@ -90,8 +105,6 @@ function gameController($interval){
 
   for ( let commodity of itemsArray) {
     let item = new Commodity(...commodity);
-    item.setPrice();
-    item.changePrice();
     vm.inventory.push(item);
   }
 }
